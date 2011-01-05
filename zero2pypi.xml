@@ -4,13 +4,48 @@
 	<name>zero2pypi</name>
 	<summary>create pypi packages (setup.py) from zero install packages</summary>
 	<description>
-	</description>
+**Usage:**
 
+	zero2pypi feed-name.xml
+	./setup.py update
+
+*Note:* This will blanketly overwrite any existing `setup.py`. Make sure
+that's okay.
+
+If it guesses incorrect dependency names, you can tell it the exact mapping
+by placing a line of the form
+
+	&lt;url&gt; &lt;pypi-name&gt;
+
+in either `./.zero2pypi` or `~/.zero2pypi`.
+
+E.g.:
+
+	http://gfxmonk.net/dist/0install/python-snakefood.xml snakefood
+
+You can have as many mapping as you like, one per line.
+	</description>
+	<rich-description xmlns="http://gfxmonk.net/dist/0install" xmlns:h="http://www.w3.org/1999/xhtml">
+		<h:p>
+			<h:strong>Usage:</h:strong>
+		</h:p>
+		<h:pre><h:code>zero2pypi feed-name.xml
+./setup.py update
+</h:code></h:pre>
+		<h:p><h:em>Note:</h:em> This will blanketly overwrite any existing <h:code>setup.py</h:code>. Make sure that's okay.</h:p>
+		<h:p>If it guesses incorrect dependency names, you can tell it the exact mapping by placing a line of the form</h:p>
+		<h:pre><h:code>&lt;url&gt; &lt;pypi-name&gt;
+</h:code></h:pre>
+		<h:p>in either <h:code>./.zero2pypi</h:code> or <h:code>~/.zero2pypi</h:code>.</h:p>
+		<h:p>E.g.:</h:p>
+		<h:pre><h:code>http://gfxmonk.net/dist/0install/python-snakefood.xml snakefood
+</h:code></h:pre>
+		<h:p>You can have as many mapping as you like, one per line.</h:p>
+	</rich-description>
 	<group main="zero2pypi.py">
 		<implementation id="sha1new=0b5d8c99fe1c4e48e914f4af93855b674ddefc05" released="2011-01-05" version="0.0.1">
-		
-    <manifest-digest sha256="017f95f878b9a4e85c681f1adc18702ea03a1c881b00dfb2bec755eb45f9c75a"/>
-    <archive href="http://gfxmonk.net/dist/0install/zero2pypi/zero2pypi-0.0.1.tgz" size="1918"/>
-  </implementation>
+			<manifest-digest sha256="017f95f878b9a4e85c681f1adc18702ea03a1c881b00dfb2bec755eb45f9c75a"/>
+			<archive href="http://gfxmonk.net/dist/0install/zero2pypi/zero2pypi-0.0.1.tgz" size="1918"/>
+		</implementation>
 	</group>
 </interface>
