@@ -3,6 +3,7 @@
 <interface uri="http://gfxmonk.net/dist/0install/zero2pypi.xml" xmlns="http://zero-install.sourceforge.net/2004/injector/interface">
 	<name>zero2pypi</name>
 	<summary>create pypi packages (setup.py) from zero install packages</summary>
+	<publish mode="0tools" xmlns="http://gfxmonk.net/dist/0install"/>
 	<description>
 **Usage:**
 
