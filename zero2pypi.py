@@ -66,7 +66,7 @@ def get_main_command(group):
 	command_elements = group.getElementsByTagNameNS(ns, "command")
 	main_commands = filter(lambda cmd: cmd.getAttribute("name") == 'run', command_elements)
 	if main_commands:
-		return main_commands[0]
+		return main_commands[0].getAttribute('path')
 	return None
 
 def load_attrs(feed):
