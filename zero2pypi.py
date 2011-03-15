@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import os
 import re
 import optparse
@@ -41,7 +41,7 @@ def get_dependency_names(requirements):
 	for requirement in requirements:
 		url = requirement.getAttribute('interface')
 		name = extract_name_for_url(url)
-		print "assuming http://pypi.python.org/pypi/%s for (%s)\n" % (name, url)
+		print("assuming http://pypi.python.org/pypi/%s for (%s)\n" % (name, url))
 		version_specs = requirement.getElementsByTagNameNS(ns, "version") or []
 		for version_spec in version_specs:
 			not_before = version_spec.getAttribute("not-before")
@@ -64,7 +64,7 @@ def get_main_command(group):
 	main_attr = group.getAttribute("main")
 	if main_attr: return main_attr
 	command_elements = group.getElementsByTagNameNS(ns, "command")
-	main_commands = filter(lambda cmd: cmd.getAttribute("name") == 'run', command_elements)
+	main_commands = list(filter(lambda cmd: cmd.getAttribute("name") == 'run', command_elements))
 	if main_commands:
 		return main_commands[0].getAttribute('path')
 	return None
@@ -90,7 +90,7 @@ def load_attrs(feed):
 	if main:
 		if main.endswith(".py"):
 			entry_point = ".".join((main[:-3].split(os.path.sep))) + ":main"
-			print "assuming %s entry point for executable python script %s" % (entry_point, main)
+			print("assuming %s entry point for executable python script %s" % (entry_point, main))
 			attrs['entry_points'] = {
 				'console_scripts': ["%s=%s" % (name, entry_point)]
 			}
@@ -114,10 +114,16 @@ If possible, you should use the zero-install feed instead:
 {description}
 """.format(description=description, tool_uri=zero2pypi_feed, uri=uri)
 	attrs['long_description'] = description
+	make_string_values(attrs)
 	return attrs
 
+def make_string_values(d):
+	for k,v in d.items():
+		if isinstance(v, bytes):
+			d[k] = v.decode('UTF-8')
+
 def write_setup_py(attrs, filename):
-	lines = ["\t%s=%r," % item for item in attrs.items()]
+	lines = ["\t%s=%s," % (k,repr(v)) for k,v in attrs.items()]
 	result = """#!/usr/bin/env python
 
 ## NOTE: ##
@@ -150,7 +156,7 @@ def main():
 	dest = 'setup.py'
 	write_setup_py(attrs, dest)
 	chmod_x(dest)
-	print "# Now run:\n./%s register" % (dest,)
+	print("# Now run:\n./%s register" % (dest,))
 
 if __name__ == '__main__':
 	main()

@@ -44,6 +44,9 @@ You can have as many mapping as you like, one per line.
 		<h:p>You can have as many mapping as you like, one per line.</h:p>
 	</rich-description>
 	<group main="zero2pypi.py">
+		<command name="run" path="zero2pypi.py">
+			<runner interface="http://gfxmonk.net/dist/0install/python3.xml"/>
+		</command>
 		<implementation id="sha1new=0b5d8c99fe1c4e48e914f4af93855b674ddefc05" released="2011-01-05" version="0.0.1">
 			<manifest-digest sha256="017f95f878b9a4e85c681f1adc18702ea03a1c881b00dfb2bec755eb45f9c75a"/>
 			<archive href="http://gfxmonk.net/dist/0install/zero2pypi/zero2pypi-0.0.1.tgz" size="1918"/>
