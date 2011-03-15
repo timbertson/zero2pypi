@@ -1,9 +1,9 @@
-<?xml version="1.0" ?>
+<?xml version="1.0"?>
 <?xml-stylesheet type='text/xsl' href='interface.xsl'?>
-<interface uri="http://gfxmonk.net/dist/0install/zero2pypi.xml" xmlns="http://zero-install.sourceforge.net/2004/injector/interface">
+<interface xmlns="http://zero-install.sourceforge.net/2004/injector/interface" uri="http://gfxmonk.net/dist/0install/zero2pypi.xml">
 	<name>zero2pypi</name>
 	<summary>create pypi packages (setup.py) from zero install packages</summary>
-	<publish mode="0tools" xmlns="http://gfxmonk.net/dist/0install"/>
+	<publish xmlns="http://gfxmonk.net/dist/0install" mode="0tools"/>
 	<description>
 **Usage:**
 
@@ -27,21 +27,29 @@ E.g.:
 You can have as many mapping as you like, one per line.
 	</description>
 	<rich-description xmlns="http://gfxmonk.net/dist/0install" xmlns:h="http://www.w3.org/1999/xhtml">
-		<h:p>
-			<h:strong>Usage:</h:strong>
-		</h:p>
-		<h:pre><h:code>zero2pypi feed-name.xml
+		<div xmlns="http://www.w3.org/1999/xhtml">
+			<p>
+				<strong>Usage:</strong>
+			</p>
+			<pre>
+				<code>zero2pypi feed-name.xml
 ./setup.py update
-</h:code></h:pre>
-		<h:p><h:em>Note:</h:em> This will blanketly overwrite any existing <h:code>setup.py</h:code>. Make sure that's okay.</h:p>
-		<h:p>If it guesses incorrect dependency names, you can tell it the exact mapping by placing a line of the form</h:p>
-		<h:pre><h:code>&lt;url&gt; &lt;pypi-name&gt;
-</h:code></h:pre>
-		<h:p>in either <h:code>./.zero2pypi</h:code> or <h:code>~/.zero2pypi</h:code>.</h:p>
-		<h:p>E.g.:</h:p>
-		<h:pre><h:code>http://gfxmonk.net/dist/0install/python-snakefood.xml snakefood
-</h:code></h:pre>
-		<h:p>You can have as many mapping as you like, one per line.</h:p>
+</code>
+			</pre>
+			<p><em>Note:</em> This will blanketly overwrite any existing <code>setup.py</code>. Make sure that's okay.</p>
+			<p>If it guesses incorrect dependency names, you can tell it the exact mapping by placing a line of the form</p>
+			<pre>
+				<code>&lt;url&gt; &lt;pypi-name&gt;
+</code>
+			</pre>
+			<p>in either <code>./.zero2pypi</code> or <code>~/.zero2pypi</code>.</p>
+			<p>E.g.:</p>
+			<pre>
+				<code>http://gfxmonk.net/dist/0install/python-snakefood.xml snakefood
+</code>
+			</pre>
+			<p>You can have as many mapping as you like, one per line.</p>
+		</div>
 	</rich-description>
 	<group main="zero2pypi.py">
 		<command name="run" path="zero2pypi.py">
@@ -50,6 +58,10 @@ You can have as many mapping as you like, one per line.
 		<implementation id="sha1new=0b5d8c99fe1c4e48e914f4af93855b674ddefc05" released="2011-01-05" version="0.0.1">
 			<manifest-digest sha256="017f95f878b9a4e85c681f1adc18702ea03a1c881b00dfb2bec755eb45f9c75a"/>
 			<archive href="http://gfxmonk.net/dist/0install/zero2pypi/zero2pypi-0.0.1.tgz" size="1918"/>
+		</implementation>
+		<implementation id="sha1new=5492f416dac4b59a283ef7f61f912f65e875d8e4" released="2011-03-15" version="0.0.2">
+			<manifest-digest sha256="0a2df0b16e8cda1896b2ba82b50ae80758606608093bad53631e019972dbd6a7"/>
+			<archive href="http://gfxmonk.net/dist/0install/zero2pypi/zero2pypi-0.0.2.tgz" size="2008"/>
 		</implementation>
 	</group>
 </interface>
