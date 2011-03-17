@@ -89,6 +89,8 @@ def load_attrs(feed):
 	
 	populate_entry_points(name, latest_group, attrs)
 	populate_pypi_extras(dom, attrs)
+	#populate_download_url(latest_implementation, attrs) # setuptools is too stupid for this to work.
+	populate_py_modules(attrs)
 
 	summary = get_text(dom, "summary")
 	if summary:
@@ -108,6 +110,22 @@ If possible, you should use the zero-install feed instead:
 	attrs['long_description'] = description
 	make_string_values(attrs)
 	return attrs
+
+def populate_download_url(latest_implementation, attrs):
+	download_urls = latest_implementation.getElementsByTagNameNS(ns, 'archive') or []
+	download_urls = list(filter(None, [impl.getAttribute('href') for impl in download_urls]))
+	if download_urls:
+		attrs['download_url'] = download_urls[0]
+
+def populate_py_modules(attrs):
+	ext = '.py'
+	is_py = lambda filename: filename.endswith(ext)
+	just_module = lambda filename: filename[:-len(ext)]
+	not_test_file = lambda module: not (module.startswith('test') or module.endswith('test'))
+	py_modules = set(filter(not_test_file, map(just_module, filter(is_py, os.listdir('.')))))
+	py_modules.difference_update(set(['setup', 'test']))
+	if py_modules:
+		attrs['py_modules'] = list(sorted(py_modules))
 
 def populate_pypi_extras(dom, attrs):
 	extras = get_text(dom, 'pypi-extra', ns=gfxmonk_ns)
