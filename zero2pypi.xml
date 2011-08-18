@@ -67,5 +67,9 @@ You can have as many mapping as you like, one per line.
 			<manifest-digest sha256="b095012723a47e52dbb315062a76d19ce5a28eed1e4d383d1440dfd8b43cdf0c"/>
 			<archive href="http://gfxmonk.net/dist/0install/zero2pypi/zero2pypi-0.0.3.tgz" size="2312"/>
 		</implementation>
+		<implementation id="sha1new=e03b78862ed5a870a2fe95b039616a4d50f6af13" released="2011-08-18" version="0.0.4">
+			<manifest-digest sha256="810fe68f701161f96a0ebf48a72c85c8423f9130f2692ff8627f059830af060a"/>
+			<archive href="http://gfxmonk.net/dist/0install/zero2pypi/zero2pypi-0.0.4.tgz" size="2569"/>
+		</implementation>
 	</group>
 </interface>

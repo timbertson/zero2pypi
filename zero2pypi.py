@@ -123,7 +123,7 @@ def populate_py_modules(attrs):
 	just_module = lambda filename: filename[:-len(ext)]
 	not_test_file = lambda module: not (module.startswith('test') or module.endswith('test'))
 	py_modules = set(filter(not_test_file, map(just_module, filter(is_py, os.listdir('.')))))
-	py_modules.difference_update(set(['setup', 'test']))
+	py_modules.difference_update(set(['setup', 'test', 'conf']))
 	if py_modules:
 		attrs['py_modules'] = list(sorted(py_modules))
 
