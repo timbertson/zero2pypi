@@ -43,14 +43,21 @@ def get_dependency_names(requirements):
 		url = requirement.getAttribute('interface')
 		name = extract_name_for_url(url)
 		print("assuming http://pypi.python.org/pypi/%s for (%s)\n" % (name, url))
+		if name == 'python':
+			print("Skipping dependency on \"python\"...")
+			continue
 		version_specs = requirement.getElementsByTagNameNS(ns, "version") or []
+		conditions = []
 		for version_spec in version_specs:
 			not_before = version_spec.getAttribute("not-before")
 			before = version_spec.getAttribute("before")
 			if not_before:
-				name = "%s>=%s" % (name, not_before)
+				conditions.append(">=%s" % (not_before,))
 			if before:
-				name = "%s<%s" % (name, before)
+				conditions.append("<%s" % (before,))
+		if conditions:
+			print(repr(conditions))
+			name += " " + ", ".join(conditions)
 		names.append(name)
 	return names
 
