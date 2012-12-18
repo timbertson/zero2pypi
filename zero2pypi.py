@@ -23,8 +23,8 @@ def get_mapping():
 					mapping[k] = v
 		except (IOError, OSError):
 			pass
-	read_mapping('.zero2pypi')
 	read_mapping(os.path.expanduser('~/.zero2pypi'))
+	read_mapping('.zero2pypi')
 	return mapping
 
 zero_to_pypi_package_mapping = get_mapping()
