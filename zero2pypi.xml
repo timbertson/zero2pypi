@@ -33,20 +33,17 @@ You can have as many mapping as you like, one per line.
 			</p>
 			<pre>
 				<code>zero2pypi feed-name.xml
-./setup.py update
-</code>
+./setup.py update</code>
 			</pre>
 			<p><em>Note:</em> This will blanketly overwrite any existing <code>setup.py</code>. Make sure that's okay.</p>
 			<p>If it guesses incorrect dependency names, you can tell it the exact mapping by placing a line of the form</p>
 			<pre>
-				<code>&lt;url&gt; &lt;pypi-name&gt;
-</code>
+				<code>&lt;url&gt; &lt;pypi-name&gt;</code>
 			</pre>
 			<p>in either <code>./.zero2pypi</code> or <code>~/.zero2pypi</code>.</p>
 			<p>E.g.:</p>
 			<pre>
-				<code>http://gfxmonk.net/dist/0install/python-snakefood.xml snakefood
-</code>
+				<code>http://gfxmonk.net/dist/0install/python-snakefood.xml snakefood</code>
 			</pre>
 			<p>You can have as many mapping as you like, one per line.</p>
 		</div>
@@ -70,6 +67,10 @@ You can have as many mapping as you like, one per line.
 		<implementation id="sha1new=e03b78862ed5a870a2fe95b039616a4d50f6af13" released="2011-08-18" version="0.0.4">
 			<manifest-digest sha256="810fe68f701161f96a0ebf48a72c85c8423f9130f2692ff8627f059830af060a"/>
 			<archive href="http://gfxmonk.net/dist/0install/zero2pypi/zero2pypi-0.0.4.tgz" size="2569"/>
+		</implementation>
+		<implementation id="sha1new=759fd5a5ceeae0d3dc945ea210719da46262ecce" released="2012-09-28" version="0.0.5">
+			<manifest-digest sha256="c63c2f2fb058dadd11b7219d4a5b70839068109d47663a3908ec934d41bfc74b"/>
+			<archive href="http://gfxmonk.net/dist/0install/zero2pypi/zero2pypi-0.0.5.tgz" size="2649"/>
 		</implementation>
 	</group>
 </interface>
