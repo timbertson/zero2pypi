@@ -2,7 +2,7 @@
 import os
 import re
 import optparse
-from xml.dom.minidom import parse
+from xml.dom.minidom import parse, Element
 
 
 ns = "http://zero-install.sourceforge.net/2004/injector/interface"
@@ -83,7 +83,7 @@ def load_attrs(feed):
 		dom = parse(f)
 	latest_group = dom.getElementsByTagNameNS(ns, "group")[-1]
 	latest_implementation = latest_group.getElementsByTagNameNS(ns, "implementation")[-1]
-	group_requires = latest_group.getElementsByTagNameNS(ns, "requires") or []
+	group_requires = [tag for tag in latest_group.childNodes if tag.nodeType == Element.ELEMENT_NODE and tag.tagName == "requires"]
 	implementation_requires = latest_implementation.getElementsByTagNameNS(ns, "requires") or []
 	attrs['version'] = latest_implementation.getAttribute('version')
 
