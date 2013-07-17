@@ -96,7 +96,7 @@ def load_attrs(feed):
 	
 	populate_entry_points(name, latest_group, attrs)
 	populate_pypi_extras(dom, attrs)
-	#populate_download_url(latest_implementation, attrs) # setuptools is too stupid for this to work.
+	populate_download_url(latest_implementation, attrs) # setuptools is too stupid for this to work.
 	populate_py_modules(attrs)
 
 	summary = get_text(dom, "summary")
