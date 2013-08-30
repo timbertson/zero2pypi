@@ -87,7 +87,7 @@ def load_attrs(feed):
 	implementation_requires = latest_implementation.getElementsByTagNameNS(ns, "requires") or []
 	attrs['version'] = latest_implementation.getAttribute('version')
 
-	uri = attrs['url'] = dom.documentElement.getAttribute("uri")
+	uri = attrs['url'] = dom.documentElement.getAttribute("uri") or dom.getElementsByTagNameNS(ns, 'feed-for')[0].getAttribute('interface')
 	name = attrs['name'] = os.path.splitext(os.path.basename(feed))[0]
 
 	dependency_names = get_dependency_names(group_requires + implementation_requires)
@@ -122,7 +122,9 @@ def populate_download_url(latest_implementation, attrs):
 	download_urls = latest_implementation.getElementsByTagNameNS(ns, 'archive') or []
 	download_urls = list(filter(None, [impl.getAttribute('href') for impl in download_urls]))
 	if download_urls:
-		attrs['download_url'] = download_urls[0]
+		url = download_urls[0]
+		if '://' in url:
+			attrs['download_url'] = url
 
 def populate_py_modules(attrs):
 	ext = '.py'
@@ -173,7 +175,7 @@ def make_string_values(d):
 
 def write_setup_py(attrs, filename):
 	extras = attrs.pop('extras', None)
-	lines = ["\t%s=%s," % (k,repr(v)) for k,v in attrs.items()]
+	lines = ["\t%s=%s," % (k,repr(v)) for k,v in sorted(attrs.items())]
 	if extras:
 		lines.append(extras)
 	result = """#!/usr/bin/env python
