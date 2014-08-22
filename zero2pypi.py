@@ -10,7 +10,7 @@ gfxmonk_ns = "http://gfxmonk.net/dist/0install"
 zero2pypi_feed = "http://gfxmonk.net/dist/0install/zero2pypi.xml"
 
 attrs = {}
-name_extractor = re.compile('(?P<name>[^/.]+)(\.xml)?$')
+name_extractor = re.compile('(python-)?(?P<name>[^/.]+)(\.xml)?$')
 
 def get_mapping():
 	mapping = {}
@@ -19,7 +19,12 @@ def get_mapping():
 			with open(filename) as f:
 				lines = filter(None, map(lambda s: s.strip(), f.readlines()))
 				for line in lines:
-					k, v = line.split()
+					vals = line.split(None, 1)
+					if len(vals) == 1:
+						k = vals[0]
+						v = None
+					else:
+						k, v = vals
 					mapping[k] = v
 		except (IOError, OSError):
 			pass
@@ -42,10 +47,12 @@ def get_dependency_names(requirements):
 	for requirement in requirements:
 		url = requirement.getAttribute('interface')
 		name = extract_name_for_url(url)
-		print("assuming http://pypi.python.org/pypi/%s for (%s)\n" % (name, url))
+		if name is None:
+			continue
 		if name == 'python':
 			print("Skipping dependency on \"python\"...")
 			continue
+		print("assuming package %s for (%s)" % (name, url))
 		version_specs = requirement.getElementsByTagNameNS(ns, "version") or []
 		conditions = []
 		for version_spec in version_specs:
@@ -88,7 +95,7 @@ def load_attrs(feed):
 	attrs['version'] = latest_implementation.getAttribute('version')
 
 	uri = attrs['url'] = dom.documentElement.getAttribute("uri") or dom.getElementsByTagNameNS(ns, 'feed-for')[0].getAttribute('interface')
-	name = attrs['name'] = os.path.splitext(os.path.basename(feed))[0]
+	name = attrs['name'] = extract_name_for_url(os.path.splitext(os.path.basename(feed))[0])
 
 	dependency_names = get_dependency_names(group_requires + implementation_requires)
 	if dependency_names:
