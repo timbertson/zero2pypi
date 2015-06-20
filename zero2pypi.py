@@ -94,7 +94,9 @@ def load_attrs(feed):
 	implementation_requires = latest_implementation.getElementsByTagNameNS(ns, "requires") or []
 	attrs['version'] = latest_implementation.getAttribute('version')
 
-	uri = attrs['url'] = dom.documentElement.getAttribute("uri") or dom.getElementsByTagNameNS(ns, 'feed-for')[0].getAttribute('interface')
+	uri = dom.documentElement.getAttribute("uri") or dom.getElementsByTagNameNS(ns, 'feed-for')[0].getAttribute('interface')
+	homepage = get_text(dom, "homepage")
+	attrs['url'] = homepage or uri
 	name = attrs['name'] = extract_name_for_url(os.path.splitext(os.path.basename(feed))[0])
 
 	dependency_names = get_dependency_names(group_requires + implementation_requires)
