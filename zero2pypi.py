@@ -115,16 +115,6 @@ def load_attrs(feed):
 		attrs['description'] = summary
 
 	description = get_text(dom, "description") or ""
-	description = """
-**Note**: This package has been built automatically by
-`zero2pypi <{tool_uri}>`_.
-If possible, you should use the zero-install feed instead:
-{uri}
-
-----------------
-
-{description}
-""".format(description=description, tool_uri=zero2pypi_feed, uri=uri)
 	attrs['long_description'] = description
 	make_string_values(attrs)
 	return attrs
