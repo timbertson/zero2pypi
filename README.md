@@ -1,3 +1,5 @@
+<img src="http://gfxmonk.net/dist/status/project/zero2pypi.png">
+
 **Usage:**
 
 	zero2pypi feed-name.xml
